@@ -1,0 +1,20 @@
+{
+  "name": "dev-server",
+  "version": "0.0.1",
+  "description": "A simple Node.js server, for zero-build development on your local machine",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0bdx/dev-server.git"
+  },
+  "keywords": [],
+  "author": "0bdx <hi@0bdx.com> (0bdx.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/0bdx/dev-server/issues"
+  },
+  "homepage": "https://github.com/0bdx/dev-server#readme"
+}
