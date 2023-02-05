@@ -3,18 +3,39 @@
   "version": "0.0.1",
   "description": "A simple Node.js server, for zero-build development on your local machine",
   "type": "module",
+  "files": [
+    "dev-server.d.ts",
+    "dev-server.js"
+  ],
+  "engines": {
+    "node": ">= 14.0.0"
+  },
+  "main": "dev-server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:prod": "rollup -c",
+    "build:types": "tsc dev-server.js --allowJs --declaration --emitDeclarationOnly",
+    "build": "for s in {prod,types};do npm run build:$s;done",
+    "preflight:test": "node test.js",
+    "preflight:types": "tsc dev-server.js --allowJs --checkJs --noEmit",
+    "preflight": "for s in {test,types};do npm run preflight:$s;done",
+    "test": "echo \"🧪 src/test.js\" && node src/test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/0bdx/dev-server.git"
   },
-  "keywords": [],
-  "author": "0bdx <hi@0bdx.com> (0bdx.com)",
+  "keywords": [ "development", "server" ],
+  "author": "0bdx <0@0bdx.com> (0bdx.com)",
   "license": "MIT",
+  "types": "./dev-server.d.ts",
   "bugs": {
     "url": "https://github.com/0bdx/dev-server/issues"
   },
-  "homepage": "https://github.com/0bdx/dev-server#readme"
+  "homepage": "https://github.com/0bdx/dev-server#readme",
+  "dependencies": {
+    "@0bdx/semi-parser": "^0.0.6"
+  },
+  "devDependencies": {
+    "rollup": "^3.14.0"
+  }
 }
