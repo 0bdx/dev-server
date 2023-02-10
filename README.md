@@ -3,10 +3,79 @@
 A simple Node.js server, for zero-build development on your local machine
 
 ∅&nbsp; __Version:__ 0.0.1  
+∅&nbsp; __NPM:__ <https://www.npmjs.com/package/@0bdx/dev-server>  
 ∅&nbsp; __Repo:__ <https://github.com/0bdx/dev-server>  
 ∅&nbsp; __Homepage:__ <https://0bdx.com/dev-server>
 
 @TODO add an overview
+
+---
+
+## Contributing
+
+### __Set up your development machine__
+
+1.  Check your __Git__ version:  
+    `git --version # should be 'git version 2.20.1' or greater`
+2.  Check your __Node__ version:  
+    `node --version # should be 'v14.0.0' or greater`
+3.  Check your global __TypeScript__ version:  
+    `tsc --version # should be 'Version 4.9.4' or greater`  
+    There is no actual TypeScript code in this project, but TypeScript can infer
+    types from the JavaScript code and JSDoc comments.
+    - VS Code uses `tsserver` to highlight errors in __src/__ JavaScript files
+    - `tsc` is needed to generate the __dev-server.d.ts__ type declaration
+
+### __Set up VS Code__
+
+1.  Check your __VS Code__ version:  
+    `code --version # should be '1.74.3' or greater`
+2.  Install and enable the [`jeremyljackson.vs-docblock`
+    ](https://marketplace.visualstudio.com/items?itemName=jeremyljackson.vs-docblock)
+    extension.
+3.  Install and enable the [`dnamsons.kimbie-dark-plus`
+    ](https://marketplace.visualstudio.com/items?itemName=dnamsons.kimbie-dark-plus)
+    theme.  
+
+### __Set up the repo locally__
+
+Clone the repository, and `cd` into it:  
+`git clone git@github.com:0bdx/dev-server.git && cd dev-server`
+
+Install the runtime dependency, and the three dev-dependencies:  
+`npm i`  
+@0bdx/semi-parser 0.0.6, 1 package, 39 kB for 6 items  
+@0bdx/build-helpers -D` 0.0.3, 1 package, 21 kB for 6 items.  
+@types/node 18.11.19, 1 package, 3.6 MB for 126 items.  
+Rollup 3.14.0, 2 packages, 2.5 MB for 31 items.  
+
+Open `dev-server` in VS Code:  
+`code .`
+
+### __Handy dev commands__
+
+Run all tests on the in-development source code:  
+`npm test`
+
+Build __dev-server.js__ and __dev-server.d.ts__:  
+`npm run build:prod`  
+`npm run build:types`
+
+Run all tests on the built __dev-server.js__ file:  
+`npm run preflight:test`
+
+Check that __dev-server.js__ uses all types correctly:  
+`npm run preflight:types` @TODO fix this
+
+Or run all the build and preflight steps in one line, eg before committing:  
+`npm run build && npm run preflight`
+
+Display what will be published:  
+`npm publish --dry-run`
+
+Publish to [npmjs.com/package/@0bdx/dev-server](
+https://www.npmjs.com/package/@0bdx/dev-server):  
+`npm publish`
 
 ---
 
@@ -44,7 +113,7 @@ touch dev-server.d.ts dev-server.js
 ```sh
 npm init --yes
 sed -ix 's/: "1.0.0",/: "0.0.1",/' *e.json
-sed -ix 's/eywords": \[/eywords": [ "development", "server" /' *e.json
+sed -ix 's/keywords": \[/keywords": [ "development", "server" /' *e.json
 sed -ix 's/: "ISC",/: "MIT",/' *e.json
 A=(§{1..3},\\n·);sed -ix "s/\"main/${A[*]}·\"main/;s/·/ /g" *e.json
 A=(§{a..f},\\n···);sed -ix "s/\"test/${A[*]}·\"test/;s/·/ /g" *e.json
@@ -56,7 +125,7 @@ sed -ix 's/§b/"§Z:§B": "tsc §0js §_"/' *e.json`
 sed -ix 's/§_/--allowJs --declaration --emitDeclarationOnly/' *e.json` 
 sed -ix 's/§c/"§Z": "for s in {§A,§B};do npm run §Z:$s;done"/' *e.json
 sed -ix 's/§A/prod/g;s/§B/types/g;s/§Z/build/g;' *e.json` 
-sed -ix 's/§d/"§Z:§D": "node test.js"/' *e.json` 
+sed -ix 's/§d/"§Z:§D": "echo \"🧬 test.js\" && node test.js"/' *e.json` 
 sed -ix 's/§e/"§Z:§E": "tsc §0js §_"/' *e.json` 
 sed -ix 's/§_/--allowJs --checkJs --noEmit/' *e.json` 
 sed -ix 's/§f/"§Z": "for s in {§D,§E};do npm run §Z:$s;done"/' *e.json
@@ -67,6 +136,8 @@ sed -ix 's/§0/dev-server./g' *e.json
 sed -ix 's/author": "/author": "0bdx <0@0bdx.com> (0bdx.com)/' *e.json
 rm package.jsonx
 npm install @0bdx/semi-parser
+npm install @0bdx/build-helpers -D
+npm install @types/node -D
 npm install rollup -D
 ```
 
@@ -75,7 +146,7 @@ npm install rollup -D
 2. Change the version to 0.0.1:  
    `sed -ix 's/: "1.0.0",/: "0.0.1",/' *e.json`
 3. Add keywords, for better [npmjs.org](http://npmjs.org) searchability:  
-   `sed -ix 's/eywords": \[/eywords": [ "development", "server" /' *e.json`
+   `sed -ix 's/keywords": \[/keywords": [ "development", "server" /' *e.json`
 4. Change the license to MIT:  
    `sed -ix 's/: "ISC",/: "MIT",/' *e.json`
 5. Insert three top-level placeholder properties before `"main"`, and then  
@@ -99,7 +170,7 @@ npm install rollup -D
 10. The fourth script runs unit tests on the main file, __dev-server.js__,  
     and the fifth script checks it against the type declarations.  
     The sixth script is a shortcut to run both `"preflight:..."` scripts:  
-    `sed -ix 's/§d/"§Z:§D": "node test.js"/' *e.json`  
+    `sed -ix 's/§d/"§Z:§D": "echo \"🧬 test.js\" && node test.js"/' *e.json`  
     `sed -ix 's/§e/"§Z:§E": "tsc §0js §_"/' *e.json`  
     `sed -ix 's/§_/--allowJs --checkJs --noEmit/' *e.json`  
     `sed -ix 's/§f/"§Z": "for s in {§D,§E};do npm run §Z:$s;done"/' *e.json`  
@@ -113,7 +184,9 @@ npm install rollup -D
     `sed -ix 's/author": "/author": "0bdx <0@0bdx.com> (0bdx.com)/' *e.json`
 14. Delete the temporary __package.jsonx__ file:  
     `rm package.jsonx`
-15. Install one non-dev dependency (0.0.6, 1 package, 39 kB, 6 items):  
-    `npm install @0bdx/semi-parser`
-16. Install one dev-dependency (3.14.0, 2 packages, 2.5 MB for 31 items):  
-    `npm install rollup -D`
+15. Install one non-dev dependency:  
+    `npm install @0bdx/semi-parser` 0.0.6, 1 package, 39 kB for 6 items  
+16. Install three dev-dependencies:  
+    `npm install @0bdx/build-helpers -D` 0.0.3, 1 package, 21 kB for 6 items  
+    `npm install @types/node -D` 18.11.19, 1 package, 3.6 MB for 126 items  
+    `npm install rollup -D` 3.14.0, 2 packages, 2.5 MB for 31 items  

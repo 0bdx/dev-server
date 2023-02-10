@@ -1,13 +1,8 @@
-/**
- * https://www.npmjs.com/package/@0bdx/dev-server
- * @version 0.0.1
- * @license Copyright (c) 2023 0bdx <0@0bdx.com> (0bdx.com)
- * SPDX-License-Identifier: MIT
- */
 import child_process from 'child_process';
 import fs from 'fs';
 import http from 'http';
 import { repairJsImports } from '@0bdx/semi-parser';
+
 
 /* ---------------------------- Exported Function --------------------------- */
 
@@ -32,7 +27,7 @@ import { repairJsImports } from '@0bdx/semi-parser';
  * @return {void}
  *     Does not return anything
  */
-function devServer(repairMap = {}, options = {}) {
+export function devServer(repairMap = {}, options = {}) {
 
 
     /* ------------------------------- Options ------------------------------ */
@@ -43,7 +38,7 @@ function devServer(repairMap = {}, options = {}) {
     setDefault('host', '127.0.0.1'); // localhost
     setDefault('port', 4321);
     function setDefault(n, d) { // name, default
-        options[n] = typeof options[n] !== 'undefined' ? options[n] : d; }
+        options[n] = typeof options[n] !== 'undefined' ? options[n] : d }
 
     // Destructure the options.
     const { dir, doOpen, host, port } = options;
@@ -80,7 +75,7 @@ function devServer(repairMap = {}, options = {}) {
                 res.setHeader('Content-Type', mime);
                 res.write(repairJsImports(source, repairMap));
                 res.end();                
-            } catch (error) { send404(res, 'Not Found'); }
+            } catch (error) { send404(res, 'Not Found') }
             return;
         }
 
@@ -157,5 +152,3 @@ function getMime(ext) {
         xml: 'text/xml',
     }[ext];
 }
-
-export { devServer };

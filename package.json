@@ -1,5 +1,5 @@
 {
-  "name": "dev-server",
+  "name": "@0bdx/dev-server",
   "version": "0.0.1",
   "description": "A simple Node.js server, for zero-build development on your local machine",
   "type": "module",
@@ -15,7 +15,7 @@
     "build:prod": "rollup -c",
     "build:types": "tsc dev-server.js --allowJs --declaration --emitDeclarationOnly",
     "build": "for s in {prod,types};do npm run build:$s;done",
-    "preflight:test": "node test.js",
+    "preflight:test": "echo \"🧬 test.js\" && node test.js",
     "preflight:types": "tsc dev-server.js --allowJs --checkJs --noEmit",
     "preflight": "for s in {test,types};do npm run preflight:$s;done",
     "test": "echo \"🧪 src/test.js\" && node src/test.js"
@@ -24,7 +24,10 @@
     "type": "git",
     "url": "git+https://github.com/0bdx/dev-server.git"
   },
-  "keywords": [ "development", "server" ],
+  "keywords": [
+    "development",
+    "server"
+  ],
   "author": "0bdx <0@0bdx.com> (0bdx.com)",
   "license": "MIT",
   "types": "./dev-server.d.ts",
@@ -36,6 +39,8 @@
     "@0bdx/semi-parser": "^0.0.6"
   },
   "devDependencies": {
+    "@0bdx/build-helpers": "^0.0.3",
+    "@types/node": "^18.13.0",
     "rollup": "^3.14.0"
   }
 }
