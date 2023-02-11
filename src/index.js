@@ -3,6 +3,9 @@ import fs from 'fs';
 import http from 'http';
 import { repairJsImports } from '@0bdx/semi-parser';
 
+import getExt from './get-ext.js';
+
+export { getExt };
 
 /* ---------------------------- Exported Function --------------------------- */
 
@@ -118,13 +121,6 @@ function send404(res, err) {
     res.statusCode = 404;
     res.end(err.message || err);
     console.error(err.message || err);
-}
-
-// Gets the file extension from a url, or undefined if no extension is present.
-function getExt(url) {
-    const exts = url.split('/').pop().split('.');
-    if (exts.length === 1) return void 0;
-    return exts.pop().toLowerCase();
 }
 
 // Returns the mime type if the extension is recognised, or else undefined.

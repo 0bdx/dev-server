@@ -9,6 +9,31 @@ import fs from 'fs';
 import http from 'http';
 import { repairJsImports } from '@0bdx/semi-parser';
 
+/**
+ * Returns the extension from a filename, path or url, converted to lowercase.
+ * 
+ * Returns undefined if no extension is present.
+ *
+ * @param   {string}  url
+ *     A filename, path or url which may end in an extension
+ * @return  {string|void}
+ *     Returns the extension, or undefined if no extension is present
+ */
+function getExt(url) {
+
+    // Validate the argument.
+    if (typeof url !== 'string') throw Error(
+        `Error: getExt(): url is type '${typeof url}' not 'string'`);
+
+    // Remove the query string, if there is one.
+    const queryPos = url.lastIndexOf('?');
+    if (queryPos !== -1) url = url.slice(0, queryPos);
+
+    const exts = url.split('/').pop().split('.');
+    if (exts.length === 1) return void 0;
+    return exts.pop().toLowerCase();
+}
+
 /* ---------------------------- Exported Function --------------------------- */
 
 /**
@@ -125,13 +150,6 @@ function send404(res, err) {
     console.error(err.message || err);
 }
 
-// Gets the file extension from a url, or undefined if no extension is present.
-function getExt(url) {
-    const exts = url.split('/').pop().split('.');
-    if (exts.length === 1) return void 0;
-    return exts.pop().toLowerCase();
-}
-
 // Returns the mime type if the extension is recognised, or else undefined.
 function getMime(ext) {
     return {
@@ -158,4 +176,4 @@ function getMime(ext) {
     }[ext];
 }
 
-export { devServer };
+export { devServer, getExt };

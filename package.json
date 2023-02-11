@@ -39,7 +39,7 @@
     "@0bdx/semi-parser": "^0.0.6"
   },
   "devDependencies": {
-    "@0bdx/build-helpers": "^0.0.3",
+    "@0bdx/build-helpers": "^0.0.4",
     "@types/node": "^18.13.0",
     "rollup": "^3.14.0"
   }

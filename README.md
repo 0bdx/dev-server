@@ -45,9 +45,9 @@ Clone the repository, and `cd` into it:
 Install the runtime dependency, and the three dev-dependencies:  
 `npm i`  
 @0bdx/semi-parser 0.0.6, 1 package, 39 kB for 6 items  
-@0bdx/build-helpers -D` 0.0.3, 1 package, 21 kB for 6 items.  
+@0bdx/build-helpers 0.0.4, 1 package, 22 kB for 6 items.  
 @types/node 18.11.19, 1 package, 3.6 MB for 126 items.  
-Rollup 3.14.0, 2 packages, 2.5 MB for 31 items.  
+rollup 3.14.0, 2 packages, 2.5 MB for 31 items.  
 
 Open `dev-server` in VS Code:  
 `code .`
@@ -187,6 +187,6 @@ npm install rollup -D
 15. Install one non-dev dependency:  
     `npm install @0bdx/semi-parser` 0.0.6, 1 package, 39 kB for 6 items  
 16. Install three dev-dependencies:  
-    `npm install @0bdx/build-helpers -D` 0.0.3, 1 package, 21 kB for 6 items  
+    `npm install @0bdx/build-helpers -D` 0.0.4, 1 package, 22 kB for 6 items  
     `npm install @types/node -D` 18.11.19, 1 package, 3.6 MB for 126 items  
     `npm install rollup -D` 3.14.0, 2 packages, 2.5 MB for 31 items  

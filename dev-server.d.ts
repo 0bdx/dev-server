@@ -41,3 +41,14 @@ export type DevServerOptions = {
  *     Does not return anything
  */
 export function devServer(repairMap?: any, options?: DevServerOptions): void;
+/**
+ * Returns the extension from a filename, path or url, converted to lowercase.
+ *
+ * Returns undefined if no extension is present.
+ *
+ * @param   {string}  url
+ *     A filename, path or url which may end in an extension
+ * @return  {string|void}
+ *     Returns the extension, or undefined if no extension is present
+ */
+export function getExt(url: string): string | void;

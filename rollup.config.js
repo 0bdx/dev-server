@@ -1,17 +1,13 @@
 import { readFileSync } from 'fs';
 import { execSync } from 'child_process';
-import {
-    generateBanner,
-    getFirstCommitYear,
-    rollupConfigBasicLib
-} from '@0bdx/build-helpers';
+import * as bh from '@0bdx/build-helpers';
 
-export default rollupConfigBasicLib(
+export default bh.rollupConfigBasicLib(
     'dev-server.js',
-    generateBanner(
+    bh.generateBanner(
         new Date(),
         readFileSync('./package.json', 'utf-8'),
-        getFirstCommitYear(execSync),
+        bh.getFirstCommitYear(execSync),
         true,
     ),
 );
